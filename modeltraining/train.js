@@ -77,7 +77,7 @@ const createPoseLandmarker = async () => {
         numPoses: 2
     });
     enableWebcamButton.addEventListener("click", enableCam);
-    enableWebcamButton.innerText = "Start de Game!";
+    enableWebcamButton.innerText = "Start de Yoga detector!";
     classifyButton.addEventListener("click", classifyCurrentPose);
     console.log("PoseLandmarker is ready!");
 };
