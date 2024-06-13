@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Train document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer type="module" src="train.js"></script>
+    <!-- Add TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Add MediaPipe -->
+    <script src="https://cdn.skypack.dev/@mediapipe/tasks-vision"></script>
+    <title>Yoga Pose Detector</title>
 </head>
 <body>
-    <script src="train.js" type="module"></script>
+    <section>
+        <h1>Yoga detection</h1>
+        <button id="webcamButton">Start de Yoga detector!</button>
+        <button id="classifyButton" style="display: none;">Classify Pose</button>
+    </section>
+    <section id="liveView" class="videoView">
+        <video id="webcam" style="width: 1280px; height: 720px; position: absolute;" autoplay playsinline muted></video>
+        <canvas id="output_canvas" width="1280" height="720" style="position: absolute; left: 0; top: 0;"></canvas>
+    </section>
 </body>
 </html>

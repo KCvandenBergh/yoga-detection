@@ -14,17 +14,17 @@ async function trainModel() {
             machine.learn(pose, 'plank');
         });
 
-        //handtofootposes
+        // handtofootposes
         data.handtofootposes.forEach(pose => {
             machine.learn(pose, 'handtofoot');
         });
 
-        //treeposes
+        // treeposes
         data.treeposes.forEach(pose => {
             machine.learn(pose, 'tree');
         });
 
-        //gettinginposition
+        // gettinginposition
         data.gettinginposition.forEach(pose => {
             machine.learn(pose, 'gettinginposition');
         });
@@ -52,8 +52,8 @@ let poseLandmarker = undefined;
 let webcamRunning = false;
 let globalresult;
 
-const videoWidth = "480px";
-const videoHeight = "270px";
+const videoWidth = "1280px";
+const videoHeight = "720px";
 
 // Check voor webcam toegang en start de applicatie
 function startApp() {
@@ -92,11 +92,12 @@ function enableCam(event) {
     webcamRunning = true;
     enableWebcamButton.innerText = "Predicting";
     enableWebcamButton.disabled = true;
+    classifyButton.style.display = "inline-block"; // Laat de classify knop zien
 
     const constraints = {
         video: {
-            width: { exact: 480 },
-            height: { exact: 270 }
+            width: { exact: 1280 },
+            height: { exact: 720 }
         }
     };
 
@@ -131,8 +132,8 @@ function drawPose(result) {
 }
 
 // Pose gegevens vastleggen en classificeren
-function capturePose(pose) {
-    console.log(`Show data for ${pose} pose`);
+function capturePose() {
+    console.log(`Show data for pose`);
     let temp = [];
     for (let landmark of globalresult.landmarks[0]) {
         temp.push(landmark.x, landmark.y, landmark.z);
@@ -151,6 +152,8 @@ function classifyCurrentPose() {
     console.log(`I think this is a ${prediction}`);
 }
 
+// Start de applicatie zodra de pagina geladen is
+document.addEventListener("DOMContentLoaded", startApp);
 
 
 // let prediction = machine.classify([]);
