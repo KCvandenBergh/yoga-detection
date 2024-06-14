@@ -6,7 +6,7 @@ const machine = new kNear(k);
 //JSON data fetch
 async function trainModel() {
     try {
-        const response = await fetch('/datacollection/data.JSON');
+        const response = await fetch('datacollection/data.JSON');
         const data = await response.json();
         console.log(data);
 
@@ -52,6 +52,7 @@ const drawingUtils = new DrawingUtils(canvasCtx);
 let poseLandmarker = undefined;
 let webcamRunning = false;
 let globalresult;
+
 
 const videoWidth = "1280px";
 const videoHeight = "720px";
@@ -155,3 +156,5 @@ function classifyCurrentPose() {
 
 // Start de applicatie zodra de pagina geladen is
 document.addEventListener("DOMContentLoaded", startApp);
+
+startApp();
