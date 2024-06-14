@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="training-style.css">
-    <script defer type="module" src="train.js"></script>
-    <title>Yoga Pose Detector</title>
+    <title>Train document</title>
 </head>
 <body>
     <section>
-        <h1>Yoga detection</h1>
-        <button id="webcamButton">Start de Yoga detector!</button>
-        <button id="classifyButton" style="display: none;">Classify Pose</button>
+        <button id="webcamButton">start de yoga detector</button>
+        <button id="classifyButton">Classify</button>
+    
     </section>
     <section id="liveView" class="videoView">
-        <video id="webcam" style="width: 1280px; height: 720px; position: absolute;" autoplay playsinline muted></video>
-        <canvas id="output_canvas" width="1280" height="720" style="position: absolute; left: 0; top: 0;"></canvas>
+        <video id="webcam" style="width: 1280px; height: 720px; position: absolute" autoplay playsinline muted></video>
+        <canvas class="output_canvas" id="output_canvas" width="1280" height="720" style="position: absolute; left: 0px; top: 0px;"></canvas>
     </section>
+    <script src="train.js" type="module"></script>
 </body>
 </html>

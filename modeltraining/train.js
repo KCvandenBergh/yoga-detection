@@ -3,10 +3,11 @@ import kNear from "./knear.js";
 const k = 3;
 const machine = new kNear(k);
 
+
 //JSON data fetch
 async function trainModel() {
     try {
-        const response = await fetch('datacollection/data.JSON');
+        const response = await fetch('../datacollection/data.JSON');
         const data = await response.json();
         console.log(data);
 
@@ -56,6 +57,7 @@ let globalresult;
 
 const videoWidth = "1280px";
 const videoHeight = "720px";
+
 
 // Check voor webcam toegang en start de applicatie
 function startApp() {
