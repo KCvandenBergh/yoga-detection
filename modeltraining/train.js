@@ -8,6 +8,7 @@ async function trainModel() {
     try {
         const response = await fetch('/datacollection/data.JSON');
         const data = await response.json();
+        console.log(data);
 
         // plankposes
         data.plankposes.forEach(pose => {
@@ -154,7 +155,3 @@ function classifyCurrentPose() {
 
 // Start de applicatie zodra de pagina geladen is
 document.addEventListener("DOMContentLoaded", startApp);
-
-
-// let prediction = machine.classify([]);
-// console.log(`I think this is a ${prediction}`);
