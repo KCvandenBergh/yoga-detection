@@ -12,6 +12,9 @@
             Voer een van de poses uit en laat je yoga partner op classify klikken. De yoga trainer zal detecteren welke pose dit is. Als je het goed gedaan hebt verschijnt er een
         "goed gedaan" op het scherm.</h1>
     </header>
+    <section id="predictionOutput">
+        <h2>Prediction: <span id="predictionText">None</span></h2>
+    </section>
     <section>
         <button id="webcamButton">start de yoga detector</button>
         <button id="classifyButton">Classify</button>
@@ -21,9 +24,7 @@
         <video id="webcam" style="width: 1280px; height: 720px; position: absolute" autoplay playsinline muted></video>
         <canvas class="output_canvas" id="output_canvas" width="1280" height="720" style="position: absolute; left: 0px; top: 0px;"></canvas>
     </section>
-    <section id="predictionOutput">
-        <h2>Prediction: <span id="predictionText">None</span></h2>
-    </section>
+    
     <script src="train.js" type="module"></script>
 </body>
 </html>
