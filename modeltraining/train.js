@@ -3,33 +3,27 @@ import kNear from "./knear.js";
 const k = 3;
 const machine = new kNear(k);
 
-
 //JSON data fetch
 async function trainModel() {
     try {
         const response = await fetch('../datacollection/data.JSON');
         const data = await response.json();
-        console.log(data);
+        console.log("originele data", data);
 
-        // plankposes
-        data.plankposes.forEach(pose => {
-            machine.learn(pose, 'plank');
-        });
+        const cleanData = {};
+        for (const [poseType, poses] of Object.entries(data)) {
+            cleanData[poseType] = poses.filter(isValidPose);
+            console.log(`Number of valid ${poseType}:`, cleanData[poseType].length);
+            console.log(`Number of invalid ${poseType}:`, poses.length - cleanData[poseType].length);
+        }
 
-        // handtofootposes
-        data.handtofootposes.forEach(pose => {
-            machine.learn(pose, 'handtofoot');
-        });
+        console.log("Cleaned data:", cleanData);
 
-        // treeposes
-        data.treeposes.forEach(pose => {
-            machine.learn(pose, 'tree');
-        });
-
-        // gettinginposition
-        data.gettinginposition.forEach(pose => {
-            machine.learn(pose, 'gettinginposition');
-        });
+        for (const [poseType, poses] of Object.entries(cleanData)) {
+            poses.forEach(pose => {
+                machine.learn(pose, poseType);
+            });
+        }
 
         console.log('Model training is complete.');
     } catch (error) {
@@ -37,8 +31,29 @@ async function trainModel() {
     }
 }
 
+function isValidPose(pose) {
+    // Controleer of het aantal waarden correct is
+    if (pose.length !== 99) {
+        console.log("Invalid pose length:", pose);
+        return false;
+    }
+
+    // Controleer of alle waarden binnen het bereik van -1 tot 1 liggen
+    for (let value of pose) {
+        if (value < -1 || value > 1) {
+            console.log("Invalid value in pose:", pose);
+            return false;
+        }
+    }
+
+    return true;
+}
+export {trainModel};
+
 // model trainen
 trainModel();
+
+
 
 // Webcam en pose-detectie setup
 import { PoseLandmarker, FilesetResolver, DrawingUtils } from "https://cdn.skypack.dev/@mediapipe/tasks-vision@0.10.0";
@@ -49,6 +64,7 @@ const enableWebcamButton = document.getElementById("webcamButton");
 const classifyButton = document.getElementById("classifyButton");
 const canvasCtx = canvasElement.getContext("2d");
 const drawingUtils = new DrawingUtils(canvasCtx);
+
 
 let poseLandmarker = undefined;
 let webcamRunning = false;
@@ -94,7 +110,7 @@ function enableCam(event) {
         return;
     }
     webcamRunning = true;
-    enableWebcamButton.innerText = "Predicting";
+    // enableWebcamButton.innerText = "Predicting";
     enableWebcamButton.disabled = true;
     classifyButton.style.display = "inline-block"; // Laat de classify knop zien
 
@@ -154,6 +170,7 @@ function classifyCurrentPose() {
     const features = capturePose();
     let prediction = machine.classify(features);
     console.log(`I think this is a ${prediction}`);
+    predictionText.textContent = `I think this is a ${prediction}`;
 }
 
 // Start de applicatie zodra de pagina geladen is

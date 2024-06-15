@@ -1,23 +1,60 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
+    background-color: #f0f4f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+header {
+    text-align: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 1.5em;
+    line-height: 1.6;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Stijl voor video-elementen */
 video {
     display: block;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
+    transform: scaleX(-1); /* Spiegelt het video-element horizontaal */
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
 }
 
+/* Stijl voor knoppen */
 button {
-  font-size:1em;
-  padding:1em;
+    font-size: 1.2em; 
+    padding: 0.8em 1.2em; 
+    background-color: #007bff; 
+    color: #fff; 
+    border: none; 
+    cursor: pointer;
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s ease; 
 }
+
+button:hover {
+    background-color: #0056b3; 
+}
+
 
 .videoView {
     position: relative;
-    width: 80vw;/*overruled by js*/
+    width: 80vw;
 }
 
 .canvas {
@@ -31,4 +68,3 @@ button {
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
 }
-
